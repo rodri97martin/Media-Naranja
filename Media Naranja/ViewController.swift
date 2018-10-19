@@ -75,14 +75,10 @@ class ViewController: UIViewController {
     
     private func getMediaNaranjaDay() {
         
-        if birthday == nil || loveday == nil {
-            return
+        if let bd = birthday, let ld = loveday {
+            let interval = ld.timeIntervalSince(bd)
+            mediaNaranja = ld.addingTimeInterval(interval)
         }
-        
-        let interval = loveday!.timeIntervalSince(birthday!)
-        mediaNaranja = loveday!.addingTimeInterval(interval)
-        
-        
     }
 
 }
