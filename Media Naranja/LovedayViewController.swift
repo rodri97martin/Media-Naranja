@@ -10,8 +10,8 @@ import UIKit
 
 class LovedayViewController: UIViewController {
     
-    var loveday = Date()
-    var birthday = Date()
+    var loveday: Date?
+    var birthday: Date?
     let ac = AC()
     
     @IBOutlet weak var lovedayPicker: UIDatePicker!
@@ -19,7 +19,7 @@ class LovedayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        lovedayPicker.date = loveday
+        lovedayPicker.date = loveday ?? Date()
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -28,16 +28,17 @@ class LovedayViewController: UIViewController {
                 ac.showAlert("La fecha introducida es del futuro")
                 present(ac.alert!, animated: true)
                 return false
-            } else if lovedayPicker.date < birthday {
-                ac.showAlert("No puedes enamorarte antes de nacer")
-                present(ac.alert!, animated: true)
-                return false
+            } else if let bd = birthday {
+                if lovedayPicker.date < bd {
+                    ac.showAlert("No puedes enamorarte antes de nacer")
+                    present(ac.alert!, animated: true)
+                    return false
+                }
             } else {
                 return true
             }
-        } else {
-            return true
         }
+        return true
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
