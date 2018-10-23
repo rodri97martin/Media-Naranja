@@ -15,11 +15,6 @@ class AC {
     func showAlert(_ message: String) {
         
         alert = UIAlertController(title: "Fecha incorrecta", message: message, preferredStyle: .alert)
-        alert?.addAction(
-            UIAlertAction(title: "OK",
-                          style: .default,
-                          handler: {(aa :UIAlertAction) in
-                                        print("Se pulsó OK")
-        }))
+        alert?.addAction(UIAlertAction(title: "OK", style: .default))
     }
 }
