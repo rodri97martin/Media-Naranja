@@ -11,6 +11,8 @@ import UIKit
 class BirthdayViewController: UIViewController {
     
     var birthday = Date()
+    var loveday = Date()
+    let ac = AC()
 
     @IBOutlet weak var birthdayPicker: UIDatePicker!
     
@@ -20,6 +22,24 @@ class BirthdayViewController: UIViewController {
         birthdayPicker.date = birthday
     }
 
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "Birthday Aceptar" {
+            if birthdayPicker.date > Date() {
+                ac.showAlert("La fecha introducida es del futuro")
+                present(ac.alert!, animated: true)
+                return false
+            } else if birthdayPicker.date > loveday {
+                ac.showAlert("No puedes nacer después de enamorarte")
+                present(ac.alert!, animated: true)
+                return false
+            } else {
+                return true
+            }
+        } else {
+            return true
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "Birthday Aceptar" {
@@ -28,6 +48,4 @@ class BirthdayViewController: UIViewController {
             }
         }
     }
-    
-
 }

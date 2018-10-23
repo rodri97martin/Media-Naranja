@@ -36,12 +36,18 @@ class ViewController: UIViewController {
                 if let bd = birthday {
                     bvc.birthday = bd
                 }
+                if let ld = loveday {
+                    bvc.loveday = ld
+                }
             }
         } else if segue.identifier == "Loveday" {
             
             if let lvc = segue.destination as? LovedayViewController {
                 if let ld = loveday {
-                   lvc.loveday = ld
+                    lvc.loveday = ld
+                }
+                if let bd = birthday {
+                    lvc.birthday = bd
                 }
             }
         }
