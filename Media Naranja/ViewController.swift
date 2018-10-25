@@ -20,13 +20,36 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let defaults = UserDefaults.standard
+        if let bd = defaults.object(forKey: "birthday") as? Date {
+            birthday = bd
+        }
+        if let ld = defaults.object(forKey: "love") as? Date {
+            loveday = ld
+        }
+        
         getMediaNaranjaDay()
         updateLabels()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        saveDates()
+    }
+    
+    private func saveDates() {
+        let defaults = UserDefaults.standard
+        defaults.set(birthday, forKey: "birthday")
+        defaults.set(loveday, forKey: "love")
+        defaults.synchronize()
     }
     
     @IBAction func goHome(_ segue: UIStoryboardSegue) {
         getMediaNaranjaDay()
         updateLabels()
+        saveDates()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
